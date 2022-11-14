@@ -130,3 +130,11 @@ CREATE TABLE student_registration(
 	FOREIGN KEY (student_id) REFERENCES student ON UPDATE CASCADE,
 	FOREIGN KEY (classroom_id) REFERENCES classroom ON UPDATE CASCADE
 );
+
+CREATE TABLE session_registration(
+    session_id int NOT NULL,
+    classroom_id int NOT NULL,
+    PRIMARY KEY (session_id, classroom_id),
+    FOREIGN KEY (session_id) REFERENCES("session") ON UPDATE CASCADE,
+    FOREIGN KEY (classroom_id) REFERENCES(classroom) ON UPDATE CASCADE
+)
