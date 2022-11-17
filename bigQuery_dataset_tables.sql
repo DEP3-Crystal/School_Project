@@ -4,6 +4,7 @@ CREATE TABLE `school.user`
   first_name STRING NOT NULL,
   last_name STRING NOT NULL,
   email STRING NOT NULL,
+  gender STRING NOT NULL,
   biography STRING,
   password STRING,
   status STRING NOT NULL
@@ -63,8 +64,6 @@ CREATE TABLE `school.session`
   description STRING,
   difficulty_level STRING,
   keywords STRING,
-  start_time DATETIME NOT NULL,
-  end_time DATETIME NOT NULL
 )
 ;
 CREATE TABLE `school.student_grades`
@@ -103,7 +102,6 @@ CREATE TABLE `school.room`
 CREATE TABLE `school.classroom`
 (
   classroom_id INT64 NOT NULL,
-  session_id INT64 NOT NULL,
   room_id INT64 NOT NULL,
   capacity INT64 NOT NULL
 )

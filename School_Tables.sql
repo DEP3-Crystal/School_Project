@@ -7,6 +7,7 @@ CREATE TABLE "user"(
 	first_name VARCHAR(100) NOT NULL CHECK(first_name NOT LIKE '%[0-9]%'),
 	last_name VARCHAR(100) NOT NULL CHECK(last_name NOT LIKE '%[0-9]%'),
 	email VARCHAR(256) NOT NULL CHECK(email LIKE '%_@_%._%'),
+	gender CHAR(1) NOT NULL CHECK(gender in ("M","F")),
 	biography VARCHAR(300),
 	"password" TEXT,
 	"status" CHAR(1) NOT NULL,
@@ -71,8 +72,6 @@ CREATE TABLE "session"(
 	description VARCHAR(300),
 	difficulty_level VARCHAR(25),
 	keywords VARCHAR(256),
-	start_time TIMESTAMP NOT NULL,
-	end_time TIMESTAMP NOT NULL,
 	PRIMARY KEY (session_id),
 	FOREIGN KEY (department_id) REFERENCES department ON UPDATE CASCADE
 );
@@ -114,7 +113,6 @@ CREATE TABLE room(
 
 CREATE TABLE classroom(
 	classroom_id SMALLINT NOT NULL UNIQUE,
-	session_id INT NOT NULL,
 	room_id SMALLINT NOT NULL,
 	capacity SMALLINT NOT NULL,
 	PRIMARY KEY (classroom_id),
