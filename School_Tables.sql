@@ -2,8 +2,8 @@ CREATE DATABASE school
 -- CREATE DATABASE test
 --USE school
 --USE Test
-CREATE TABLE person(
-	person_id INT NOT NULL UNIQUE,
+CREATE TABLE "user"(
+	"user_id" INT NOT NULL UNIQUE,
 	first_name VARCHAR(100) NOT NULL CHECK(first_name NOT LIKE '%[0-9]%'),
 	last_name VARCHAR(100) NOT NULL CHECK(last_name NOT LIKE '%[0-9]%'),
 	email VARCHAR(256) NOT NULL CHECK(email LIKE '%_@_%._%'),
@@ -11,23 +11,23 @@ CREATE TABLE person(
 	"password" TEXT,
 	"status" CHAR(1) NOT NULL,
 	CONSTRAINT per_status_discriminator CHECK("status" in ('S','W')),
-	PRIMARY KEY (person_id)
+	PRIMARY KEY ("user_id")
 );
 
 CREATE TABLE worker(
-	person_id INT NOT NULL UNIQUE,
+	"user_id" INT NOT NULL UNIQUE,
 	phone_number VARCHAR(20),
 	is_teacher BIT NOT NULL,
 	is_organizer BIT NOT NULL,
-	PRIMARY KEY (person_id),
-	FOREIGN KEY (person_id) REFERENCES person ON UPDATE CASCADE
+	PRIMARY KEY ("user_id"),
+	FOREIGN KEY ("user_id") REFERENCES "user" ON UPDATE CASCADE
 );
 
 
 CREATE TABLE organizer(
-	person_id INT NOT NULL,
-	PRIMARY KEY (person_id),
-	FOREIGN KEY (person_id) REFERENCES person ON UPDATE CASCADE
+	"user_id" INT NOT NULL,
+	PRIMARY KEY ("user_id"),
+	FOREIGN KEY ("user_id") REFERENCES "user" ON UPDATE CASCADE
 );
 CREATE TABLE department(
 	department_id INT NOT NULL UNIQUE,
@@ -37,20 +37,20 @@ CREATE TABLE department(
 	FOREIGN KEY (organizer_id) REFERENCES organizer ON UPDATE CASCADE
 );
 CREATE TABLE teacher(
-	person_id INT NOT NULL UNIQUE,
+	"user_id" INT NOT NULL UNIQUE,
 	title VARCHAR(256) NOT NULL,
 	credentials VARCHAR(256),
 	department_id INT NOT NULL,
-	PRIMARY KEY (person_id),
+	PRIMARY KEY ("user_id"),
 	FOREIGN KEY (department_id) REFERENCES department ON UPDATE CASCADE
 );
 
 CREATE TABLE student(
-	person_id INT NOT NULL UNIQUE,
+	"user_id" INT NOT NULL UNIQUE,
 	department_id INT NOT NULL,
 	teacher_id INT NOT NULL,
-	PRIMARY KEY (person_id),
-	FOREIGN KEY (person_id) REFERENCES person ON UPDATE CASCADE,
+	PRIMARY KEY ("user_id"),
+	FOREIGN KEY ("user_id") REFERENCES "user" ON UPDATE CASCADE,
 	FOREIGN KEY (teacher_id) REFERENCES teacher ON UPDATE CASCADE
 );
 
