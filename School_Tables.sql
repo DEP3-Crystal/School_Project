@@ -1,13 +1,9 @@
-CREATE DATABASE school
--- CREATE DATABASE test
---USE school
---USE Test
 CREATE TABLE "user"(
 	"user_id" INT NOT NULL UNIQUE,
 	first_name VARCHAR(100) NOT NULL CHECK(first_name NOT LIKE '%[0-9]%'),
 	last_name VARCHAR(100) NOT NULL CHECK(last_name NOT LIKE '%[0-9]%'),
 	email VARCHAR(256) NOT NULL CHECK(email LIKE '%_@_%._%'),
-	gender CHAR(1) NOT NULL CHECK(gender in ("M","F")),
+	gender CHAR(1) NOT NULL CHECK(gender in ('M','F')),
 	biography VARCHAR(300),
 	"password" TEXT,
 	"status" CHAR(1) NOT NULL,
