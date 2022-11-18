@@ -112,7 +112,6 @@ CREATE TABLE classroom(
 	room_id SMALLINT NOT NULL,
 	capacity SMALLINT NOT NULL,
 	PRIMARY KEY (classroom_id),
-	FOREIGN KEY (session_id) REFERENCES "session" ON UPDATE CASCADE,
 	FOREIGN KEY (room_id) REFERENCES room ON UPDATE CASCADE
 );
 
@@ -128,7 +127,9 @@ CREATE TABLE student_registration(
 CREATE TABLE session_registration(
     session_id int NOT NULL,
     classroom_id int NOT NULL,
+	start_time TIMESTAMP NOT NULL,
+	end_time TIMESTAMP NOT NULL,
     PRIMARY KEY (session_id, classroom_id),
-    FOREIGN KEY (session_id) REFERENCES("session") ON UPDATE CASCADE,
-    FOREIGN KEY (classroom_id) REFERENCES(classroom) ON UPDATE CASCADE
+    FOREIGN KEY (session_id) REFERENCES "session" ON UPDATE CASCADE,
+    FOREIGN KEY (classroom_id) REFERENCES classroom ON UPDATE CASCADE
 );
