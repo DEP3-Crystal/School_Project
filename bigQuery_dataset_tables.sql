@@ -99,7 +99,7 @@ CREATE TABLE `school.room`
   type STRING
 )
 ;
-CREATE TABLE `school.classroom`
+CREATE TABLE `school.classroom``
 (
   classroom_id INT64 NOT NULL,
   room_id INT64 NOT NULL,
@@ -117,7 +117,9 @@ CREATE TABLE `school.student_registration`
 CREATE TABLE `school.session_registration`
 (
   session_id INT64 NOT NULL,
-  classroom_id INT64 NOT NULL
+  classroom_id INT64 NOT NULL,
+  start_time DATETIME NOT NULL,
+  end_time DATETIME NOT NULL
 )
 ;
 
