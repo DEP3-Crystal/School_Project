@@ -95,7 +95,7 @@ CREATE TABLE `school.room`
   room_id INT64 NOT NULL,
   school_id INT64 NOT NULL,
   floor INT64 NOT NULL,
-  dor_number INT64 NOT NULL,
+  door_number INT64 NOT NULL,
   type STRING
 )
 ;

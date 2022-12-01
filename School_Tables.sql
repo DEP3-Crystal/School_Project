@@ -101,7 +101,7 @@ CREATE TABLE room(
 	room_id SMALLINT NOT NULL UNIQUE,
 	school_id SMALLINT NOT NULL,
 	"floor" SMALLINT NOT NULL,
-	dor_number SMALLINT NOT NULL,
+	door_number SMALLINT NOT NULL,
 	"type" VARCHAR(30),
 	PRIMARY KEY (room_id),
 	FOREIGN KEY (school_id) REFERENCES school ON UPDATE CASCADE
