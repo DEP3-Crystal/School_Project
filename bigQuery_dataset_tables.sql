@@ -46,7 +46,6 @@ CREATE TABLE `school.student`
 (
   user_id INT64 NOT NULL,
   department_id INT64 NOT NULL,
-  teacher_id INT64 NOT NULL
 )
 ;
 CREATE TABLE `school.teacher_rating`

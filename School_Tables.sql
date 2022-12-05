@@ -45,7 +45,6 @@ CREATE TABLE teacher(
 CREATE TABLE student(
 	"user_id" INT NOT NULL UNIQUE,
 	department_id INT NOT NULL,
-	teacher_id INT NOT NULL,
 	PRIMARY KEY ("user_id"),
 	FOREIGN KEY ("user_id") REFERENCES "user" ON UPDATE CASCADE,
 	FOREIGN KEY (teacher_id) REFERENCES teacher ON UPDATE CASCADE
