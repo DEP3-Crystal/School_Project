@@ -1,6 +1,7 @@
-package com.crystal.school.addDataToDB;
+package infrastructure.postgres.sinker;
 
-import com.crystal.school.model.Room;
+import model.FileUtils;
+import model.Room;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
 import org.apache.beam.sdk.io.jdbc.JdbcIO;
@@ -10,29 +11,37 @@ import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.values.PCollection;
 
+import java.io.IOException;
+import java.util.Properties;
 
-public class AddRoomDataToDB {
+
+public class RoomDataSinker {
 
     public static final String CSV_HEADER = "room_id,school_id,floor,door_number,type";
 
-    public static void main(String[] args) {
-        PipelineOptions options = PipelineOptionsFactory.create();
-        Pipeline pipeline = Pipeline.create(options);
-        String postgresDriver = "org.postgresql.Driver";
-        String hostname = "jdbc:postgresql://localhost:5432/school";
+    public static void main(String[] args) throws IOException {
+
+        Properties properties = FileUtils.loadProperties("database.properties");
+
+        String driver = properties.getProperty("PGDRIVER");
+        String hostName = properties.getProperty("PGHOSTNAME");
+        String username = properties.getProperty("PGUSERNAME");
+        String password = properties.getProperty("PGPASSWORD");
         String tableName = "room";
 
+        PipelineOptions options = PipelineOptionsFactory.create();
+        Pipeline pipeline = Pipeline.create(options);
+
         PCollection<Room> data = pipeline
-                .apply("Read data from csv file", TextIO.read().from("src/main/resources/room_table.csv"))
+                .apply("Read data from csv file", TextIO.read().from("src/main/resources/input_data/room_table.csv"))
                 .apply(ParDo.of(new FilterHeaderFn(CSV_HEADER)))
                 .apply(ParDo.of(new ParseRoomDataFn()));
 
 
-
         data.apply(JdbcIO.<Room>write().withDataSourceConfiguration(JdbcIO.DataSourceConfiguration
-                .create(postgresDriver, hostname)
-                .withUsername("postgres")
-                .withPassword(System.getenv("PGPASSWORD")))
+                        .create(driver, hostName)
+                        .withUsername(username)
+                        .withPassword(password))
                 .withStatement(String.format("insert into %s values(?, ?, ?, ?, ?)", tableName))
                 .withPreparedStatementSetter((JdbcIO.PreparedStatementSetter<Room>) (element, preparedStatement) -> {
 

@@ -1,6 +1,7 @@
-package com.crystal.school.addDataToDB;
+package infrastructure.postgres.sinker;
 
-import com.crystal.school.model.School;
+import model.FileUtils;
+import model.School;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
 import org.apache.beam.sdk.io.jdbc.JdbcIO;
@@ -10,25 +11,34 @@ import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.values.PCollection;
 
-public class AddSchoolDataToDB {
+import java.io.IOException;
+import java.util.Properties;
+
+public class SchoolDataSinker {
     public static final String CSV_HEADER = "school_id,location,name";
 
-    public static void main(String[] args) {
-        PipelineOptions options = PipelineOptionsFactory.create();
-        Pipeline pipeline = Pipeline.create(options);
-        String postgresDriver = "org.postgresql.Driver";
-        String hostname = "jdbc:postgresql://localhost:5432/school";
+    public static void main(String[] args) throws IOException {
+
+        Properties properties = FileUtils.loadProperties("database.properties");
+
+        String driver = properties.getProperty("PGDRIVER");
+        String hostName = properties.getProperty("PGHOSTNAME");
+        String username = properties.getProperty("PGUSERNAME");
+        String password = properties.getProperty("PGPASSWORD");
         String tableName = "school";
 
+        PipelineOptions options = PipelineOptionsFactory.create();
+        Pipeline pipeline = Pipeline.create(options);
+
         PCollection<School> data = pipeline
-                .apply("Read data from csv file", TextIO.read().from("src/main/resources/school_table.csv"))
+                .apply("Read data from csv file", TextIO.read().from("src/main/resources/input_data/school_table.csv"))
                 .apply(ParDo.of(new FilterHeaderFn(CSV_HEADER)))
                 .apply(ParDo.of(new ParseSchoolDataFn()));
 
         data.apply(JdbcIO.<School>write().withDataSourceConfiguration(JdbcIO.DataSourceConfiguration
-                        .create(postgresDriver, hostname)
-                        .withUsername("postgres")
-                        .withPassword(System.getenv("PGPASSWORD")))
+                        .create(driver, hostName)
+                        .withUsername(username)
+                        .withPassword(password))
                 .withStatement(String.format("insert into %s values(?, ?, ?)", tableName))
                 .withPreparedStatementSetter((JdbcIO.PreparedStatementSetter<School>) (element, preparedStatement) -> {
 
@@ -38,8 +48,6 @@ public class AddSchoolDataToDB {
                 }));
 
         pipeline.run().waitUntilFinish();
-
-        System.out.println("Finished!");
     }
 
     public static class FilterHeaderFn extends DoFn<String, String> {

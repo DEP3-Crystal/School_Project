@@ -1,4 +1,4 @@
-package com.crystal.school.model;
+package model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
