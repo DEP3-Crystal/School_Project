@@ -1,6 +1,6 @@
 package infrastructure.postgres.sinker;
 
-import model.FileUtils;
+import utils.FileUtils;
 import model.StudentRegistration;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
@@ -13,6 +13,8 @@ import org.apache.beam.sdk.values.PCollection;
 
 import java.io.IOException;
 import java.util.Properties;
+
+import static utils.TimeUtils.getValueOfTimestamp;
 
 public class StudentRegistrationDataSinker {
     public static final String CSV_HEADER = "user_id,room_id,datetime";
@@ -73,7 +75,7 @@ public class StudentRegistrationDataSinker {
             String[] data = line.split(",");
 
             StudentRegistration registration = new StudentRegistration(Integer.parseInt(data[0]),
-                    Integer.parseInt(data[1]), java.sql.Timestamp.valueOf(data[2]));
+                    Integer.parseInt(data[1]), getValueOfTimestamp(data[2]));
 
             out.output(registration);
         }

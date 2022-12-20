@@ -1,6 +1,6 @@
 package infrastructure.postgres.sinker;
 
-import model.FileUtils;
+import utils.FileUtils;
 import model.SessionRegistration;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
@@ -13,6 +13,8 @@ import org.apache.beam.sdk.values.PCollection;
 
 import java.io.IOException;
 import java.util.Properties;
+
+import static utils.TimeUtils.getValueOfTimestamp;
 
 public class SessionRegistrationDataSinker {
 
@@ -70,13 +72,12 @@ public class SessionRegistrationDataSinker {
     }
 
     public static class ParseSessionRegistrationDataFn extends DoFn<String, SessionRegistration> {
-
         @ProcessElement
         public void processElement(@Element String line, OutputReceiver<SessionRegistration> out) {
             String[] data = line.split(",");
 
             SessionRegistration sessionRegistration = new SessionRegistration(Integer.parseInt(data[0]),
-                    Integer.parseInt(data[1]), java.sql.Timestamp.valueOf(data[2]), java.sql.Timestamp.valueOf(data[3]));
+                    Integer.parseInt(data[1]), getValueOfTimestamp(data[2]), getValueOfTimestamp(data[3]));
 
             out.output(sessionRegistration);
         }

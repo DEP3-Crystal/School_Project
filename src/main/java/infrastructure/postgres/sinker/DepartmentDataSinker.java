@@ -1,7 +1,7 @@
 package infrastructure.postgres.sinker;
 
 import model.Department;
-import model.FileUtils;
+import utils.FileUtils;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
 import org.apache.beam.sdk.io.jdbc.JdbcIO;
