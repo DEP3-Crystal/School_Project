@@ -79,5 +79,4 @@ public class StudentRegistrationDataSinker {
 
             out.output(registration);
         }
-    }
-}
+    }}
