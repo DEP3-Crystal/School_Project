@@ -1,102 +1,102 @@
-user_id,credentials
-501,justo lacinia eget
-502,consequat
-503,gravida
-504,curabitur in
-505,primis
-506,mi
-507,morbi porttitor lorem
-508,tortor
-509,massa
-510,posuere
-511,quis justo
-512,platea dictumst
-513,sit amet
-514,ut rhoncus aliquet
-515,suspendisse ornare consequat
-516,semper
-517,mus
-518,metus aenean fermentum
-519,in sagittis dui
-520,diam cras
-521,orci eget
-522,in hac habitasse
-523,felis ut at
-524,non sodales
-525,sed accumsan
-526,mi
-527,bibendum
-528,sapien placerat ante
-529,natoque penatibus
-530,tristique fusce
-531,lacus
-532,sapien varius
-533,et
-534,tortor
-535,in
-536,non ligula pellentesque
-537,lacinia eget
-538,dis
-539,neque vestibulum
-540,lacinia eget
-541,quis turpis
-542,donec quis
-543,leo
-544,duis
-545,mi nulla ac
-546,blandit
-547,vel nulla eget
-548,maecenas ut
-549,vel augue
-550,nulla
-551,ornare imperdiet sapien
-552,in imperdiet
-553,nunc donec
-554,proin interdum mauris
-555,habitasse platea dictumst
-556,nascetur
-557,turpis
-558,vestibulum velit
-559,vel lectus in
-560,dui proin leo
-561,ut blandit non
-562,leo
-563,eleifend
-564,odio porttitor
-565,cubilia curae duis
-566,pede
-567,phasellus in felis
-568,sem
-569,ac lobortis vel
-570,pede
-571,lectus
-572,accumsan tellus
-573,nulla sed
-574,nisi
-575,donec
-576,mi nulla
-577,convallis morbi odio
-578,luctus
-579,eu
-580,justo
-581,eros
-582,a odio
-583,eleifend
-584,nonummy
-585,eget
-586,at nulla suspendisse
-587,laoreet ut
-588,morbi vestibulum
-589,hac habitasse platea
-590,dui luctus rutrum
-591,odio donec
-592,vestibulum aliquet ultrices
-593,sapien
-594,vitae
-595,volutpat in congue
-596,facilisi cras
-597,quis odio consequat
-598,lectus in quam
-599,id nisl venenatis
-600,aliquet
-601,penatibus et
+user_id,credentials,rating_sum,rating_count
+501,justo lacinia eget,17,5
+502,consequat,17,5
+503,gravida,14,5
+504,curabitur in,18,5
+505,primis,18,5
+506,mi,13,5
+507,morbi porttitor lorem,10,5
+508,tortor,16,5
+509,massa,19,5
+510,posuere,14,5
+511,quis justo,21,5
+512,platea dictumst,12,5
+513,sit amet,17,5
+514,ut rhoncus aliquet,14,5
+515,suspendisse ornare consequat,16,5
+516,semper,8,5
+517,mus,18,5
+518,metus aenean fermentum,9,5
+519,in sagittis dui,17,5
+520,diam cras,14,5
+521,orci eget,15,5
+522,in hac habitasse,15,5
+523,felis ut at,15,5
+524,non sodales,14,5
+525,sed accumsan,20,5
+526,mi,9,5
+527,bibendum,13,5
+528,sapien placerat ante,15,5
+529,natoque penatibus,14,5
+530,tristique fusce,16,5
+531,lacus,19,5
+532,sapien varius,13,5
+533,et,15,5
+534,tortor,18,5
+535,in,12,5
+536,non ligula pellentesque,13,5
+537,lacinia eget,10,5
+538,dis,11,5
+539,neque vestibulum,8,5
+540,lacinia eget,16,5
+541,quis turpis,16,5
+542,donec quis,14,5
+543,leo,18,5
+544,duis,18,5
+545,mi nulla ac,18,5
+546,blandit,16,5
+547,vel nulla eget,13,5
+548,maecenas ut,13,5
+549,vel augue,20,5
+550,nulla,13,5
+551,ornare imperdiet sapien,20,5
+552,in imperdiet,16,5
+553,nunc donec,15,5
+554,proin interdum mauris,14,5
+555,habitasse platea dictumst,9,5
+556,nascetur,21,5
+557,turpis,12,5
+558,vestibulum velit,18,5
+559,vel lectus in,14,5
+560,dui proin leo,16,5
+561,ut blandit non,10,5
+562,leo,12,5
+563,eleifend,13,5
+564,odio porttitor,20,5
+565,cubilia curae duis,16,5
+566,pede,10,5
+567,phasellus in felis,14,5
+568,sem,11,5
+569,ac lobortis vel,13,5
+570,pede,16,5
+571,lectus,14,5
+572,accumsan tellus,17,5
+573,nulla sed,19,5
+574,nisi,18,5
+575,donec,11,5
+576,mi nulla,14,5
+577,convallis morbi odio,15,5
+578,luctus,10,5
+579,eu,15,5
+580,justo,13,5
+581,eros,13,5
+582,a odio,9,5
+583,eleifend,12,5
+584,nonummy,13,5
+585,eget,15,5
+586,at nulla suspendisse,13,5
+587,laoreet ut,10,5
+588,morbi vestibulum,17,5
+589,hac habitasse platea,18,5
+590,dui luctus rutrum,13,5
+591,odio donec,14,5
+592,vestibulum aliquet ultrices,9,5
+593,sapien,18,5
+594,vitae,16,5
+595,volutpat in congue,16,5
+596,facilisi cras,12,5
+597,quis odio consequat,15,5
+598,lectus in quam,9,5
+599,id nisl venenatis,12,5
+600,aliquet,13,5
+601,penatibus et,17,5

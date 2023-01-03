@@ -1,4 +1,4 @@
-package model;
+package model.emails;
 
 import lombok.Data;
 

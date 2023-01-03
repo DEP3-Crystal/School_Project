@@ -14,9 +14,11 @@ import org.apache.beam.sdk.values.PCollection;
 import java.io.IOException;
 import java.util.Properties;
 
+import static utils.TimeUtils.getValueOfTimestamp;
+
 
 public class SessionDataSinker {
-    public static final String CSV_HEADER = "session_id,department_id,title,description,type,difficulty_level,keywords,start_time,end_time";
+    public static final String CSV_HEADER = "session_id,department_id,title,description,type,difficulty_level,keywords,start_time,end_time,rating_sum,rating_count";
 
     public static void main(String[] args) throws IOException {
 
@@ -40,7 +42,7 @@ public class SessionDataSinker {
                         .create(driver, hostName)
                         .withUsername(username)
                         .withPassword(password))
-                .withStatement(String.format("insert into %s values(?, ?, ?, ?, ?, ?, ?, ?, ?)", tableName))
+                .withStatement(String.format("insert into %s values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", tableName))
                 .withPreparedStatementSetter((JdbcIO.PreparedStatementSetter<Session>) (element, preparedStatement) -> {
 
                     preparedStatement.setInt(1, element.getSessionId());
@@ -52,6 +54,8 @@ public class SessionDataSinker {
                     preparedStatement.setString(7, element.getType());
                     preparedStatement.setTimestamp(8, element.getStartTime());
                     preparedStatement.setTimestamp(9, element.getEndTime());
+                    preparedStatement.setInt(10, element.getRatingSum());
+                    preparedStatement.setInt(11, element.getRatingCount());
                 }));
 
         pipeline.run().waitUntilFinish();
@@ -83,7 +87,8 @@ public class SessionDataSinker {
             String[] data = line.split(",");
 
             Session session = new Session(Integer.parseInt(data[0]), Integer.parseInt(data[1]), data[2], data[3], data[4],
-                    data[5], data[6], java.sql.Timestamp.valueOf(data[7]), java.sql.Timestamp.valueOf(data[8]));
+                    data[5], data[6], getValueOfTimestamp(data[7]), getValueOfTimestamp(data[8]),
+                    Integer.parseInt(data[9]), Integer.parseInt(data[10]));
 
             out.output(session);
         }

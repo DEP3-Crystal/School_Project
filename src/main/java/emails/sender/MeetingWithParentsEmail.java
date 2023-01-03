@@ -1,6 +1,6 @@
 package emails.sender;
 
-import model.Subscriber;
+import model.emails.Subscriber;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.coders.SerializableCoder;
 import org.apache.beam.sdk.io.jdbc.JdbcIO;

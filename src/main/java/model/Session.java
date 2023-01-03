@@ -21,6 +21,8 @@ public class Session implements Serializable {
     private String keywords;
     private Timestamp startTime;
     private Timestamp endTime;
+    private Integer ratingSum;
+    private Integer ratingCount;
 
 
 }

@@ -16,7 +16,7 @@ import java.util.Properties;
 
 public class TeacherDataSinker {
 
-    public static final String CSV_HEADER = "user_id,credentials";
+    public static final String CSV_HEADER = "user_id,credentials,rating_sum,rating_count";
 
     public static void main(String[] args) throws IOException {
 
@@ -40,11 +40,13 @@ public class TeacherDataSinker {
                         .create(driver, hostName)
                         .withUsername(username)
                         .withPassword(password))
-                .withStatement(String.format("insert into %s values(?, ?)", tableName))
+                .withStatement(String.format("insert into %s values(?, ?, ?, ?)", tableName))
                 .withPreparedStatementSetter((JdbcIO.PreparedStatementSetter<Teacher>) (element, preparedStatement) -> {
 
                     preparedStatement.setInt(1, element.getUserId());
                     preparedStatement.setString(2, element.getCredentials());
+                    preparedStatement.setInt(3, element.getRatingSum());
+                    preparedStatement.setInt(4, element.getRatingCount());
                 }));
 
         pipeline.run().waitUntilFinish();
@@ -74,7 +76,7 @@ public class TeacherDataSinker {
         public void processElement(@Element String line, OutputReceiver<Teacher> out) {
             String[] data = line.split(",");
 
-            Teacher teacher = new Teacher(Integer.parseInt(data[0]), data[1]);
+            Teacher teacher = new Teacher(Integer.parseInt(data[0]), data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]));
 
             out.output(teacher);
         }
