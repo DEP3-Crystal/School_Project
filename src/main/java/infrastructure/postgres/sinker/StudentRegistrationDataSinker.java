@@ -17,7 +17,7 @@ import java.util.Properties;
 import static utils.TimeUtils.getValueOfTimestamp;
 
 public class StudentRegistrationDataSinker {
-    public static final String CSV_HEADER = "user_id,room_id,datetime";
+    public static final String CSV_HEADER = "user_id,session_id,datetime";
 
     public static void main(String[] args) throws IOException {
         Properties properties = FileUtils.loadProperties("database.properties");

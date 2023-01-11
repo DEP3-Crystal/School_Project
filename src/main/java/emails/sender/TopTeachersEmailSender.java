@@ -111,7 +111,7 @@ public class TopTeachersEmailSender {
             email.setHtmlMsg("<p>Here are the best rated teachers:</p>" +
                     "<ul>" +
                     "<li>" + teacher.getFirstName() + " " + teacher.getLastName() + " :" + teacher.getRating() + "</li>" +
-                    "</ul");
+                    "</ul>");
             subscribers.apply(ParDo.of(new AddSubscriberToEmailFn(email)));
             email.send();
 
